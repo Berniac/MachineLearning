@@ -1,7 +1,7 @@
 # 🤖 Machine Learning
 
 **Author:** Bernard Mwamburi  
-**Repository:** [Berniac/MachineLearning](https://github.com/Berniac/MachineLearing)  
+**Repository:** [Berniac/MachineLearning](https://github.com/Berniac/MachineLearning)  
 **Language:** Python (Jupyter Notebooks)
 
 ---
@@ -15,7 +15,7 @@ This repository contains all coursework for a Machine Learning course, including
 ## 📁 Repository Structure
 
 ```
-MachineLearing/
+MachineLearning/
 │
 ├── Data Exploration and Preprocessing/   →  Data Exploration & Preprocessing
 ├── Supervised Learning/   →  Supervised Learning — Regression & Classification
@@ -35,7 +35,7 @@ Introduction to machine learning workflows. Topics covered include loading and i
 ### `Supervised Learning` - Regression & Classification
 Implementation and evaluation of core supervised learning algorithms. Covers linear and logistic regression, decision trees, and performance metrics such as accuracy, precision, recall, and mean squared error.
 
-### `Model Evaluation and Optimization'
+### `Model Evaluation and Optimization`
 Deep dive into model selection and performance tuning. Topics include cross-validation, bias-variance tradeoff, hyperparameter tuning with grid search, and regularization techniques (L1/L2).
 
 ### `Unsupervised Learning` Dimensionality Reduction
