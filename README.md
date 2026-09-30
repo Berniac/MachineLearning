@@ -90,3 +90,58 @@ pip install numpy pandas matplotlib seaborn scikit-learn jupyter
 - All notebooks are self-contained and include markdown explanations alongside the code.
 
 ---
+
+## 📦 Datasets
+
+Some datasets are too large to keep in the repository, and two files (`diamonds.csv`, `census.csv`) are empty placeholders. Download each missing file and save it **in the same folder as the notebook that loads it**, under the filename shown below, since the notebooks read them with relative paths.
+
+| Notebook folder | File | Status | Source |
+|---|---|---|---|
+| `Data Exploration and Preprocessing` | `boston_housing.csv` | ✅ included | — |
+| `Data Exploration and Preprocessing` | `diamonds.csv` | ⚠️ empty, replace | [seaborn-data `diamonds.csv`](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/diamonds.csv) (same data as [Kaggle: Diamonds](https://www.kaggle.com/datasets/shivam2503/diamonds)) |
+| `Supervised Learning` | `breast_cancer.csv`, `mobile.csv`, `boston_housing.csv` | ✅ included | — |
+| `Model Evaluation and Optimization` | `census.csv` | ⚠️ empty, replace | [UCI Adult / Census Income](https://archive.ics.uci.edu/dataset/2/adult) (`adult.data`, 32,561 rows) |
+| `Model Evaluation and Optimization` | `census_new.csv` | ✅ included | — |
+| `Unsupervised Learning` | `train.csv`, `test.csv` | ❌ missing | [Kaggle: Digit Recognizer (MNIST)](https://www.kaggle.com/c/digit-recognizer/data) |
+| `End-to-End ML Projects` | `e-commerce_transaction_data.csv` | ❌ missing | [Kaggle: Fraudulent E-Commerce Transactions](https://www.kaggle.com/datasets/shriyashjagtap/fraudulent-e-commerce-transactions) (`Fraudulent_E-Commerce_Transaction_Data.csv`, the larger ~1.47M-row file) |
+
+### Setup steps
+
+Run these from the repository root. The Kaggle commands need the [Kaggle CLI](https://github.com/Kaggle/kaggle-api) (`pip install kaggle`) with an API token in `~/.kaggle/kaggle.json`.
+
+**Diamonds** (direct download, the columns match the notebook exactly):
+
+```bash
+curl -L -o "Data Exploration and Preprocessing/diamonds.csv" \
+  https://raw.githubusercontent.com/mwaskom/seaborn-data/master/diamonds.csv
+```
+
+**Census** (the raw UCI file has no header row, so rename the columns to what the notebook expects):
+
+```python
+import pandas as pd
+
+cols = ['age', 'workclass', 'fnlwgt', 'education', 'educ_num', 'marital_status',
+        'occupation', 'relationship', 'race', 'sex', 'capital_gain', 'capital_loss',
+        'hrs_per_week', 'native_country', 'income']
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data'
+census = pd.read_csv(url, header=None, names=cols, skipinitialspace=True, na_values='?')
+census.to_csv('Model Evaluation and Optimization/census.csv', index=False)
+```
+
+**MNIST digits** (accept the competition rules on the Kaggle page first):
+
+```bash
+kaggle competitions download -c digit-recognizer -p "Unsupervised Learning"
+unzip -o "Unsupervised Learning/digit-recognizer.zip" train.csv test.csv -d "Unsupervised Learning"
+```
+
+**E-commerce fraud transactions:**
+
+```bash
+kaggle datasets download -d shriyashjagtap/fraudulent-e-commerce-transactions -p "End-to-End ML Projects" --unzip
+mv "End-to-End ML Projects/Fraudulent_E-Commerce_Transaction_Data.csv" \
+   "End-to-End ML Projects/e-commerce_transaction_data.csv"
+```
+
+> The census and e-commerce files used in the course may have been lightly cleaned, so results from a fresh download can differ slightly from the saved notebook outputs.
